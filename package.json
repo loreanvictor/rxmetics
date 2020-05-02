@@ -1,0 +1,45 @@
+{
+  "name": "rxmetics",
+  "version": "0.0.1",
+  "description": "Arithmetics for RxJS Observables",
+  "main": "dist/es5/index.js",
+  "module": "dist/es6/index.js",
+  "types": "dist/es6/index.d.ts",
+  "scripts": {
+    "start": "ts-node samples",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "tsc -p conf/typescript/es5.json && tsc -p conf/typescript/es6.json",
+    "pack": "rollup -c conf/rollup/es6.js && rollup -c conf/rollup/es5.js"
+  },
+  "files": [
+    "dist/es6",
+    "dist/es5",
+    "dist/bundles"
+  ],
+  "sideEffects": false,
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/loreanvictor/rxmetics.git"
+  },
+  "author": "Eugene Ghanizadeh Khoub <ghanizadeh.eugene@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/loreanvictor/rxmetics/issues"
+  },
+  "homepage": "https://github.com/loreanvictor/rxmetics#readme",
+  "dependencies": {
+    "rxjs": "^6.5.5"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.9.6",
+    "@babel/preset-env": "^7.9.6",
+    "@types/node": "^13.13.4",
+    "rollup": "^2.7.6",
+    "rollup-plugin-babel": "^4.4.0",
+    "rollup-plugin-terser": "^5.3.0",
+    "rollup-plugin-uglify": "^6.0.4",
+    "ts-node": "^8.9.1",
+    "tslib": "^1.11.1",
+    "typescript": "^3.8.3"
+  }
+}
