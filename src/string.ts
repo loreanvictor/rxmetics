@@ -15,7 +15,7 @@ export function concat(a: $<string>, b: $<any>, ...bits: $<any>[]) {
 export function rxl(strings: TemplateStringsArray, ...values: $<any>[]) {
   return (
     E((...l: any[]) => 
-    strings.reduce((t, p, i) => t + p + (l[i] || '').toString(), '')
+      strings.reduce((t, p, i) => t + p + (i > values.length - 1 ? '' : l[i] || '').toString(), '')
     ) as Func$<any, string>
   )(...values);
 }
