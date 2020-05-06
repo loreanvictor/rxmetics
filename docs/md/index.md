@@ -196,4 +196,14 @@ color.subscribe(c => document.body.style.background = c);         // --> set tha
 > :Buttons
 > > :Button label=Try It!, url=https://stackblitz.com/edit/rxmetics-sample
 
+---
+
+# Full List of Functions
+
+- [Numeric operations](/docs/numbers): \
+  [`add()`](/docs/numbers#add), [`sub()`](/docs/numbers#sub), [`mul()`](/docs/numbers#mul),
+  [`div()`](/docs/numbers#div), [`neg()`](/docs/numbers#neg), [`inv()`](/docs/numbers#inv)
+- [String operations](/docs/string): \
+  [`concat()`](/docs/string#concat), [`rxl`](/docs/string#string-templates)
+
 > :ToCPrevNext
