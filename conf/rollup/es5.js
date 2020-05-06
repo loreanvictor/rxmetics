@@ -9,6 +9,6 @@ export default Object.assign(base, {
     uglify(),
   ],
   output: Object.assign(base.output, {
-    file: 'dist/bundles/connective.es5.min.js',
+    file: 'dist/bundles/rxmetics.es5.min.js',
   }),
 });

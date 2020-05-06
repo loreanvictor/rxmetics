@@ -1,6 +1,6 @@
 {
   "name": "rxmetics",
-  "version": "0.1.0",
+  "version": "0.1.2",
   "description": "Arithmetics for RxJS Observables",
   "main": "dist/es5/index.js",
   "module": "dist/es6/index.js",
@@ -30,7 +30,7 @@
   "bugs": {
     "url": "https://github.com/loreanvictor/rxmetics/issues"
   },
-  "homepage": "https://github.com/loreanvictor/rxmetics#readme",
+  "homepage": "https://loreanvictor.github.io/rxmetics",
   "dependencies": {
     "rxjs": "^6.5.5"
   },

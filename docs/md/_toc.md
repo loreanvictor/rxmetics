@@ -1,0 +1,6 @@
+[Home](/)
+[Numeric Operations](/docs/numbers)
+[String Operations](/docs/string)
+[Boolean Operations](/docs/boolean)
+[Generic Functions](/docs/generic)
+[Pipes](/docs/pipes)

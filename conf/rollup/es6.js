@@ -7,6 +7,6 @@ export default Object.assign(base, {
     terser(),
   ],
   output: Object.assign(base.output, {
-    file: 'dist/bundles/connective.es6.min.js',
+    file: 'dist/bundles/rxmetics.es6.min.js',
   }),
 });
