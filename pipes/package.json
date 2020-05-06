@@ -1,0 +1,5 @@
+{
+  "main": "../dist/es5/pipes/index.js",
+  "module": "../dist/es6/pipes/index.js",
+  "types": "dist/es6/pipes/index.d.ts"
+}

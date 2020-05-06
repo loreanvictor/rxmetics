@@ -1,5 +1,4 @@
 import { interval } from 'rxjs';
-import { map } from 'rxjs/operators';
 import { rxl, mul } from '../src';
 
 
