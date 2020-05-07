@@ -2,7 +2,7 @@ import { should, expect } from 'chai'; should();
 
 import { Subject } from 'rxjs';
 
-import { add, sub, mul, div } from '../number';
+import { add, sub, mul, div, mod } from '../number';
 
 
 describe('add()', () => {
@@ -62,5 +62,20 @@ describe('div()', () => {
     src.next(120); res.should.eql([]);
     off.next(3); res.should.eql([8]);
     off.next(-1); res.should.eql([8, -24]);
+  });
+});
+
+
+describe('mod()', () => {
+  it('should make `mod()` pipeable.', () => {
+    const src = new Subject<number>();
+    const off = new Subject<number>();
+    const res: number[] = [];
+    src.pipe(mod(off, 3)).subscribe(v => res.push(v));
+
+    res.should.eql([]);
+    src.next(12); res.should.eql([]);
+    off.next(10); res.should.eql([2]);
+    off.next(11); res.should.eql([2, 1]);
   });
 });

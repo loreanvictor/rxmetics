@@ -2,7 +2,7 @@ import { should, expect } from 'chai'; should();
 
 import { Subject } from 'rxjs';
 
-import { add, sub, mul, div, neg, inv } from '../number';
+import { add, sub, mul, div, neg, inv, mod } from '../number';
 
 
 describe('neg()', () => {
@@ -203,5 +203,44 @@ describe('div()', () => {
     b.next(3); res.should.eql([]);
     c.next(2); res.should.eql([3]);
     a.next(0); res.should.eql([3, 0]);
+  });
+});
+
+
+describe('mod()', () => {
+  it('should mod given value/observables.', () => {
+    const src = new Subject<number>();
+    const res: number[] = [];
+    mod(src, 3).subscribe(v => res.push(v));
+
+    res.should.eql([]);
+    src.next(6); res.should.eql([0]);
+    src.next(8); res.should.eql([0, 2]);
+  });
+
+  it('should also work for three values.', () => {
+    const a = new Subject<number>();
+    const b = new Subject<number>();
+    const res: number[] = [];
+    mod(a, 3, b).subscribe(v => res.push(v));
+
+    res.should.eql([]);
+    a.next(10); res.should.eql([]);
+    b.next(2); res.should.eql([1]);
+    a.next(11); res.should.eql([1, 0]);
+  });
+
+  it('should also work for more than three values.', () => {
+    const a = new Subject<number>();
+    const b = new Subject<number>();
+    const c = new Subject<number>();
+    const res: number[] = [];
+    mod(a, 10, b, c).subscribe(v => res.push(v));
+
+    res.should.eql([]);
+    a.next(36); res.should.eql([]);
+    b.next(5); res.should.eql([]);
+    c.next(2); res.should.eql([1]);
+    b.next(6); res.should.eql([1, 0]);
   });
 });

@@ -47,3 +47,14 @@ export function div(a: $<number>, b: $<number>, ...nums: $<number>[]) {
     ) as Func$<number, number>
   )(a, b, ...nums);
 }
+
+
+export function mod(a: $<number>, b: $<number>, ...nums: $<number>[]) {
+  if (nums.length == 0) return E((a: number, b: number) => a % b)(a, b);
+  if (nums.length == 1) return E((a: number, b: number, c: number) => a % b % c)(a, b, nums[0]);
+  else return (
+    E((a: number, b: number, ...l: number[]) => 
+      l.reduce((t, x) => t % x, a % b)
+    ) as Func$<number, number>
+  )(a, b, ...nums);
+}
