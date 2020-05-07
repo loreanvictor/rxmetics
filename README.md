@@ -67,3 +67,5 @@ rxl`hellow ${interval(1000)}`.subscribe(console.log);
 // > hellow 3
 // ...
 ```
+
+[Check out the docs](https://loreanvictor.github.io/rxmetics) for more info.
