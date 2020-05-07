@@ -1,6 +1,6 @@
 {
   "name": "rxmetics",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "Arithmetics for RxJS Observables",
   "main": "dist/es5/index.js",
   "module": "dist/es6/index.js",
@@ -19,6 +19,9 @@
     "dist/es5",
     "dist/bundles",
     "pipes"
+  ],
+  "keywords": [
+    "rxjs", "streams", "observables", "arithmetic", "numeric", "logic", "string templates"
   ],
   "sideEffects": false,
   "repository": {
