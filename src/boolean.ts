@@ -27,8 +27,26 @@ export function or(a: $<boolean>, b: $<boolean>, ...bools: $<boolean>[]) {
 }
 
 
-export function eq(v: any) { return E((a: any) => a === v) }
-export function neq(v: any) { return E((a: any) => a !== v) }
-export function seq(v: any) { return E((a: any) => a == v) }
-export function nseq(v: any) { return E((a: any) => a != v) }
+export function eq(a: $<any>, b: $<any>, ...rest: $<any>[]) {
+  if (rest.length == 0) return E((a: any, b: any) => a === b)(a, b);
+  if (rest.length == 1) return E((a: any, b: any, c: any) => (a === b) && (b === c))(a, b, rest[0]);
+  else return (
+    E((a: any, b: any, ...l: any[]) => 
+      (a === b) && l.every(_ => _ === a)
+    ) as Func$<any, boolean>
+  )(a, b, ...rest);
+}
+
+
+export function neq(a: $<any>, b: $<any>, ...rest: $<any>[]) {
+  if (rest.length == 0) return E((a: any, b: any) => a !== b)(a, b);
+  if (rest.length == 1) return E((a: any, b: any, c: any) => (a !== b) || (b !== c))(a, b, rest[0]);
+  else return (
+    E((a: any, b: any, ...l: any[]) => 
+      (a !== b) || l.some(_ => _ !== a)
+    ) as Func$<any, boolean>
+  )(a, b, ...rest);
+}
+
+
 export function instanceOf(v: any) { return E((a: any) => a instanceof v) }

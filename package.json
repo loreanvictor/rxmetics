@@ -1,6 +1,6 @@
 {
   "name": "rxmetics",
-  "version": "0.1.3",
+  "version": "0.1.4",
   "description": "Arithmetics for RxJS Observables",
   "main": "dist/es5/index.js",
   "module": "dist/es6/index.js",

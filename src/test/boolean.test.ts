@@ -2,7 +2,7 @@ import { should, expect } from 'chai'; should();
 
 import { Subject } from 'rxjs';
 
-import { not, truthy, and, or, eq, neq, seq, nseq, instanceOf } from '../boolean';
+import { not, truthy, and, or, eq, neq, instanceOf } from '../boolean';
 
 
 describe('not()', () => {
@@ -126,97 +126,75 @@ describe('or()', () => {
 
 
 describe('eq()', () => {
-  it('should check strict equality.', () => {
+  it('should check equality of given observables / values.', () => {
     const src = new Subject();
     const res: boolean[] = [];
-    eq(1)(src).subscribe(v => res.push(v));
+    eq(src, 42).subscribe(v => res.push(v));
 
     res.should.eql([]);
-    src.next(true); res.should.eql([false]);
-    src.next(1); res.should.eql([false, true]);
+    src.next(43); res.should.eql([false]);
+    src.next(42); res.should.eql([false, true]);
   });
 
-  it('should be pipeable.', () => {
-    const src = new Subject();
+  it('should work for 3 observables as well.', () => {
+    const a = new Subject();
+    const b = new Subject();
     const res: boolean[] = [];
-    src.pipe(eq(1)).subscribe(v => res.push(v));
+    eq(a, true, b).subscribe(v => res.push(v));
 
-    res.should.eql([]);
-    src.next(true); res.should.eql([false]);
-    src.next(1); res.should.eql([false, true]);
+    a.next(1); res.should.eql([]);
+    b.next(true); res.should.eql([false]);
+    a.next(true); res.should.eql([false, true]);
+  });
+
+  it('should work with more than 3 values as well.', () => {
+    const a = new Subject();
+    const b = new Subject();
+    const c = new Subject();
+    const res: boolean[] = [];
+    eq(a, 'halo', b, c).subscribe(v => res.push(v));
+
+    a.next('hallo'); res.should.eql([]);
+    b.next('halo'); res.should.eql([]);
+    c.next('halo'); res.should.eql([false]);
+    a.next('halo'); res.should.eql([false, true]);
   });
 });
 
 
 describe('neq()', () => {
-  it('should check strict inequality.', () => {
+  it('should check inequality of given observables / values.', () => {
     const src = new Subject();
     const res: boolean[] = [];
-    neq(1)(src).subscribe(v => res.push(v));
+    neq(src, 42).subscribe(v => res.push(v));
 
     res.should.eql([]);
-    src.next(true); res.should.eql([true]);
-    src.next(1); res.should.eql([true, false]);
+    src.next(43); res.should.eql([true]);
+    src.next(42); res.should.eql([true, false]);
   });
 
-  it('should be pipeable.', () => {
-    const src = new Subject();
+  it('should work for 3 observables as well.', () => {
+    const a = new Subject();
+    const b = new Subject();
     const res: boolean[] = [];
-    src.pipe(neq(1)).subscribe(v => res.push(v));
+    neq(a, true, b).subscribe(v => res.push(v));
 
-    res.should.eql([]);
-    src.next(true); res.should.eql([true]);
-    src.next(1); res.should.eql([true, false]);
-  });
-});
-
-
-describe('seq()', () => {
-  it('should check semi equality.', () => {
-    const src = new Subject();
-    const res: boolean[] = [];
-    seq(1)(src).subscribe(v => res.push(v));
-
-    res.should.eql([]);
-    src.next(true); res.should.eql([true]);
-    src.next(1); res.should.eql([true, true]);
-    src.next(2); res.should.eql([true, true, false]);
+    a.next(1); res.should.eql([]);
+    b.next(true); res.should.eql([true]);
+    a.next(true); res.should.eql([true, false]);
   });
 
-  it('should be pipeable.', () => {
-    const src = new Subject();
+  it('should work with more than 3 values as well.', () => {
+    const a = new Subject();
+    const b = new Subject();
+    const c = new Subject();
     const res: boolean[] = [];
-    src.pipe(seq(1)).subscribe(v => res.push(v));
+    neq(a, 'halo', b, c).subscribe(v => res.push(v));
 
-    res.should.eql([]);
-    src.next(true); res.should.eql([true]);
-    src.next(1); res.should.eql([true, true]);
-    src.next(2); res.should.eql([true, true, false]);
-  });
-});
-
-
-describe('nseq()', () => {
-  it('should check semi inequality.', () => {
-    const src = new Subject();
-    const res: boolean[] = [];
-    nseq(1)(src).subscribe(v => res.push(v));
-
-    res.should.eql([]);
-    src.next(true); res.should.eql([false]);
-    src.next(1); res.should.eql([false, false]);
-    src.next(2); res.should.eql([false, false, true]);
-  });
-
-  it('should be pipeable.', () => {
-    const src = new Subject();
-    const res: boolean[] = [];
-    src.pipe(nseq(1)).subscribe(v => res.push(v));
-
-    res.should.eql([]);
-    src.next(true); res.should.eql([false]);
-    src.next(1); res.should.eql([false, false]);
-    src.next(2); res.should.eql([false, false, true]);
+    a.next('hallo'); res.should.eql([]);
+    b.next('halo'); res.should.eql([]);
+    c.next('halo'); res.should.eql([true]);
+    a.next('halo'); res.should.eql([true, false]);
   });
 });
 
