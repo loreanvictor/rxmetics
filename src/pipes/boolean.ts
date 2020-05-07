@@ -3,7 +3,7 @@ import { Observable } from 'rxjs';
 import { $ } from '../e';
 import {and as _and, or as _or, eq as _eq, neq as _neq } from '../boolean';
 
-export { not, truthy, instanceOf } from '../boolean';
+export { not, truthy } from '../boolean';
 
 
 export function and(a: $<boolean>, ...bools: $<boolean>[]) {

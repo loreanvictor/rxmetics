@@ -48,5 +48,3 @@ export function neq(a: $<any>, b: $<any>, ...rest: $<any>[]) {
   )(a, b, ...rest);
 }
 
-
-export function instanceOf(v: any) { return E((a: any) => a instanceof v) }

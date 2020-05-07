@@ -2,7 +2,7 @@ import { should, expect } from 'chai'; should();
 
 import { Subject } from 'rxjs';
 
-import { not, truthy, and, or, eq, neq, instanceOf } from '../boolean';
+import { not, truthy, and, or, eq, neq } from '../boolean';
 
 
 describe('not()', () => {
@@ -195,30 +195,5 @@ describe('neq()', () => {
     b.next('halo'); res.should.eql([]);
     c.next('halo'); res.should.eql([true]);
     a.next('halo'); res.should.eql([true, false]);
-  });
-});
-
-
-describe('instanceOf()', () => {
-  it('should check if something is instanceof something.', () => {
-    const src = new Subject();
-    const res: boolean[] = [];
-    class X {};
-    instanceOf(X)(src).subscribe(v => res.push(v));
-
-    res.should.eql([]);
-    src.next(new X()); res.should.eql([true]);
-    src.next(42); res.should.eql([true, false]);
-  });
-
-  it('should be pipeable.', () => {
-    const src = new Subject();
-    const res: boolean[] = [];
-    class X {};
-    src.pipe(instanceOf(X)).subscribe(v => res.push(v));
-
-    res.should.eql([]);
-    src.next(new X()); res.should.eql([true]);
-    src.next(42); res.should.eql([true, false]);
   });
 });

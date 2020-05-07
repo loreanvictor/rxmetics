@@ -82,6 +82,7 @@ add(
 >
 > > :CopyButton
 
+<br/>
 
 ## String Operations
 
@@ -113,17 +114,19 @@ rxl`You were here for ${num} ...`.subscribe(console.log);
 >
 > > :CopyButton
 
+<br/>
+
 ## Boolean Operations
 
 ```ts
 import { interval } from 'rxjs';
-import { map } from 'rxjs/operators';
-import { and, eq, not } from 'rxmetics';
+import { and, not } from 'rxmetics';
+import { mod, eq } from 'rxmetics/pipes';
 
 
 and(
-  interval(1000).pipe(map(x => x % 2), eq(0)),
-  interval(500).pipe(map(x => x % 2), eq(1)),
+  interval(1000).pipe(mod(2), eq(0)),
+  interval(500).pipe(mod(2), eq(1)),
 ).pipe(not).subscribe(console.log);
 
 // Result:
@@ -137,6 +140,8 @@ and(
 > > :Button label=play_arrow, icon=true, url=https://stackblitz.com/edit/rxmetics-sample3?file=index.ts
 >
 > > :CopyButton
+
+<br/>
 
 ## Generic Functions
 
@@ -168,9 +173,9 @@ interval(1000).pipe(E(Math.sqrt)).subscribe(console.log);
 
 ---
 
-# Example
+# An Example
 
-Here is a complete example of fun stuff you can do easily with **RxMetics**:
+Here is an example of fun stuff you can do easily with **RxMetics**:
 
 ```ts
 import { mul, add, div, E, rxl } from 'rxmetics';
@@ -181,10 +186,10 @@ import { pluck } from 'rxjs/operators';
 
 const cx = window.innerWidth / 2;                                 // --> center of screen
 const cy = window.innerHeight / 2;                                // --> center of screen
-const dx = fromEvent(document, 'mousemove').pipe(
-  pluck<Event, number>('clientX'), sub(cx));                      // --> get the mouse x, subtract center from it
-const dy = fromEvent(document, 'mousemove').pipe(
-  pluck<Event, number>('clientY'), sub(cy));                      // --> get the mouse y, substract center from it
+const dx = fromEvent(document, 'mousemove')
+           .pipe(pluck('clientX'), sub(cx));                      // --> get the mouse x, subtract center from it
+const dy = fromEvent(document, 'mousemove')
+           .pipe(pluck('clientY'), sub(cy));                      // --> get the mouse y, substract center from it
 
 const D = E(Math.sqrt)(add(mul(dx, dx), mul(dy, dy)));            // --> calc distance of mouse from center
 const P = add(1, div(D, Math.sqrt(cx * cx + cy * cy)).pipe(neg)); // --> calc a power based on the distance between (0, 1)
@@ -198,12 +203,17 @@ color.subscribe(c => document.body.style.background = c);         // --> set tha
 
 ---
 
-# Full List of Functions
+# List of Functions
 
 - [Numeric operations](/docs/numbers): \
   [`add()`](/docs/numbers#add), [`sub()`](/docs/numbers#sub), [`mul()`](/docs/numbers#mul),
-  [`div()`](/docs/numbers#div), [`neg()`](/docs/numbers#neg), [`inv()`](/docs/numbers#inv)
+  [`div()`](/docs/numbers#div), [`neg()`](/docs/numbers#neg), [`inv()`](/docs/numbers#inv),
+  [`mod()`](/docs/numbers#mod)
 - [String operations](/docs/string): \
   [`concat()`](/docs/string#concat), [`rxl`](/docs/string#string-templates)
+- [Boolean operations](/docs/boolean): \
+  [`not()`](/docs/boolean#not), [`truthy()`](/docs/boolean#truthy), [`and()`](/docs/boolean#and),
+  [`or()`](/docs/boolean#or), [`eq()`](/docs/boolean#equality-checks), [`neq()`](/docs/boolean#equality-checks)
+- [Generic Functions](/docs/generic)
 
 > :ToCPrevNext
