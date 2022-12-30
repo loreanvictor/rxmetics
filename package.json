@@ -45,7 +45,7 @@
     "@types/mocha": "^7.0.2",
     "@types/node": "^13.13.4",
     "chai": "^4.2.0",
-    "mocha": "^7.1.2",
+    "mocha": "^10.2.0",
     "nyc": "^15.0.1",
     "rollup": "^2.7.6",
     "rollup-plugin-babel": "^4.4.0",
